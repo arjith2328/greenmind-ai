@@ -1,12 +1,5 @@
-import * as React from 'react';
-import { Leaf } from 'lucide-react';
+import { Leaf, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
-const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-  </svg>
-);
 
 const GithubIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -24,60 +17,68 @@ const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 export const Footer = () => {
   return (
-    <footer className="border-t border-white/10 bg-greenmind-bg py-12 mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="col-span-1 md:col-span-2">
-            <Link to="/" className="flex items-center gap-2 mb-4 group">
-              <div className="bg-greenmind-primary/20 p-2 rounded-lg">
-                <Leaf className="w-6 h-6 text-greenmind-primary" />
+    <footer className="relative bg-[#081C15] overflow-hidden pt-24 pb-12 border-t border-white/5">
+      {/* Background glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[300px] bg-greenmind-primary/5 blur-[120px] pointer-events-none rounded-b-full" />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-16">
+          
+          <div className="md:col-span-5 lg:col-span-6 space-y-6">
+            <Link to="/" className="flex items-center gap-3 group inline-flex">
+              <div className="bg-gradient-to-br from-greenmind-primary/20 to-transparent p-2.5 rounded-xl border border-greenmind-primary/20 group-hover:border-greenmind-primary/40 transition-colors">
+                <Leaf className="w-7 h-7 text-greenmind-primary" />
               </div>
-              <span className="text-xl font-bold text-white tracking-tight">GreenMind<span className="text-greenmind-primary">.AI</span></span>
+              <span className="text-2xl font-bold text-white tracking-tight">GreenMind<span className="text-greenmind-primary">.AI</span></span>
             </Link>
-            <p className="text-gray-400 max-w-sm mb-6">
-              Your personal AI-powered carbon intelligence system. Track, understand, and reduce your environmental footprint seamlessly.
+            <p className="text-gray-400 max-w-sm text-lg leading-relaxed">
+              AI-Powered Carbon Intelligence Platform.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <TwitterIcon className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+            <p className="text-gray-500 max-w-sm text-sm">
+              Building a Sustainable Future Through Artificial Intelligence.
+            </p>
+            <div className="flex space-x-5 pt-2">
+              <a href="https://github.com/arjith2328" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:scale-110 transition-all duration-300 border border-white/5">
                 <GithubIcon className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-[#0077B5] hover:bg-white/10 hover:scale-110 transition-all duration-300 border border-white/5">
                 <LinkedinIcon className="w-5 h-5" />
+              </a>
+              <a href="mailto:hello@greenmind.ai" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-greenmind-primary hover:bg-white/10 hover:scale-110 transition-all duration-300 border border-white/5">
+                <Mail className="w-5 h-5" />
               </a>
             </div>
           </div>
           
-          <div>
-            <h3 className="text-white font-semibold mb-4 tracking-wide">Product</h3>
-            <ul className="space-y-3">
-              <li><Link to="/dashboard" className="text-gray-400 hover:text-greenmind-primary transition-colors">Dashboard</Link></li>
-              <li><Link to="/coach" className="text-gray-400 hover:text-greenmind-primary transition-colors">AI Coach</Link></li>
-              <li><Link to="/simulator" className="text-gray-400 hover:text-greenmind-primary transition-colors">Simulator</Link></li>
-              <li><Link to="/scanner" className="text-gray-400 hover:text-greenmind-primary transition-colors">Receipt Scanner</Link></li>
+          <div className="md:col-span-3 lg:col-span-3">
+            <h3 className="text-white font-semibold mb-6 tracking-wide text-lg">Product</h3>
+            <ul className="space-y-4">
+              <li><Link to="/#features" className="text-gray-400 hover:text-greenmind-primary transition-colors inline-block hover:translate-x-1 transform duration-300">Features</Link></li>
+              <li><Link to="/dashboard" className="text-gray-400 hover:text-greenmind-primary transition-colors inline-block hover:translate-x-1 transform duration-300">Dashboard</Link></li>
+              <li><a href="https://github.com/arjith2328" className="text-gray-400 hover:text-greenmind-primary transition-colors inline-block hover:translate-x-1 transform duration-300">GitHub</a></li>
             </ul>
           </div>
 
-          <div>
-            <h3 className="text-white font-semibold mb-4 tracking-wide">Company</h3>
-            <ul className="space-y-3">
-              <li><a href="#" className="text-gray-400 hover:text-greenmind-primary transition-colors">About</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-greenmind-primary transition-colors">Blog</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-greenmind-primary transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-greenmind-primary transition-colors">Terms of Service</a></li>
+          <div className="md:col-span-4 lg:col-span-3">
+            <h3 className="text-white font-semibold mb-6 tracking-wide text-lg">Company</h3>
+            <ul className="space-y-4">
+              <li><a href="#" className="text-gray-400 hover:text-greenmind-primary transition-colors inline-block hover:translate-x-1 transform duration-300">About</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-greenmind-primary transition-colors inline-block hover:translate-x-1 transform duration-300">Contact</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-greenmind-primary transition-colors inline-block hover:translate-x-1 transform duration-300">Privacy Policy</a></li>
             </ul>
           </div>
+
         </div>
         
-        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">
-            &copy; {new Date().getFullYear()} GreenMind AI. All rights reserved.
+            &copy; 2026 GreenMind AI. All Rights Reserved.
           </p>
-          <p className="text-gray-500 text-sm mt-4 md:mt-0 flex items-center">
-            Made for a greener future.
-          </p>
+          <div className="flex items-center gap-2 text-sm text-gray-500">
+            <span>Designed with</span>
+            <Leaf className="w-4 h-4 text-greenmind-primary" />
+            <span>for the planet</span>
+          </div>
         </div>
       </div>
     </footer>

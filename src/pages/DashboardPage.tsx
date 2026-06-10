@@ -1,10 +1,10 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Leaf, Award, Target, TrendingDown } from 'lucide-react';
 import { CarbonTwin } from '../components/dashboard/CarbonTwin';
 import { CarbonChart } from '../components/dashboard/CarbonChart';
 import { Card, CardContent } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
+import { ReportGenerator } from '../components/dashboard/ReportGenerator';
 
 export const DashboardPage = () => {
   return (
@@ -15,15 +15,18 @@ export const DashboardPage = () => {
           <p className="text-gray-400">Here's your carbon intelligence summary for this week.</p>
         </motion.div>
         
-        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="flex gap-3">
-          <Badge variant="glass" className="px-3 py-1.5 text-sm gap-2">
-            <Award className="w-4 h-4 text-yellow-400" />
-            Level 12 Eco-Warrior
-          </Badge>
-          <Badge variant="glass" className="px-3 py-1.5 text-sm gap-2">
-            <Leaf className="w-4 h-4 text-greenmind-primary" />
-            2,450 Green Points
-          </Badge>
+        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="flex flex-col sm:flex-row items-end sm:items-center gap-4">
+          <ReportGenerator />
+          <div className="flex gap-3">
+            <Badge variant="glass" className="px-3 py-1.5 text-sm gap-2">
+              <Award className="w-4 h-4 text-yellow-400" />
+              Level 12 Eco-Warrior
+            </Badge>
+            <Badge variant="glass" className="px-3 py-1.5 text-sm gap-2">
+              <Leaf className="w-4 h-4 text-greenmind-primary" />
+              2,450 Green Points
+            </Badge>
+          </div>
         </motion.div>
       </div>
 

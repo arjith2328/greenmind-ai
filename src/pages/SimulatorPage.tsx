@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Leaf, ArrowRight, Save, DollarSign } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/Card';
@@ -10,7 +10,7 @@ export const SimulatorPage = () => {
   const [energyReduction, setEnergyReduction] = useState(10);
 
   const baselineEmissions = 12500; // kg CO2 per year
-  const baselineCost = 4500; // $ per year
+  const _baselineCost = 4500; // $ per year
 
   // Simple calculation mock
   const transportSavings = publicTransportDays * 52 * 5; // 5kg per day switched
@@ -132,7 +132,7 @@ export const SimulatorPage = () => {
                       contentStyle={{ backgroundColor: '#081C15', borderColor: '#00C853', borderRadius: '8px' }}
                     />
                     <Bar dataKey="emissions" radius={[8, 8, 0, 0]}>
-                      {chartData.map((entry, index) => (
+                      {chartData.map((_entry, index) => (
                         <Cell key={`cell-${index}`} fill={index === 0 ? '#4b5563' : '#00C853'} />
                       ))}
                     </Bar>
