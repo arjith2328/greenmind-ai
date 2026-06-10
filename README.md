@@ -6,35 +6,48 @@
 
 GreenMind AI is a next-generation sustainability platform that helps individuals understand, track, predict, and reduce their carbon footprint using Artificial Intelligence.
 
-Unlike traditional carbon calculators, GreenMind AI acts as a personal sustainability coach by providing intelligent recommendations, future carbon forecasting, and interactive impact visualizations.
+Unlike traditional carbon calculators, GreenMind AI provides intelligent insights, future forecasting, sustainability coaching, and environmental impact visualization.
 
 ---
 
-## 🚀 Problem Statement
+## 🚀 Live Demo
 
-Millions of people want to live sustainably but struggle to understand:
-
-* Where their carbon emissions come from
-* Which lifestyle changes matter most
-* How much impact their actions create
-* How to stay motivated on their sustainability journey
-
-Most existing solutions only provide a carbon footprint score without meaningful guidance.
+https://greenmind-ai01.netlify.app/
 
 ---
 
-## 💡 Our Solution
+## 📂 GitHub Repository
 
-GreenMind AI transforms sustainability awareness into actionable intelligence.
+https://github.com/arjith2328/greenmind-ai
 
-Using AI-powered analysis, users can:
+---
 
-* Calculate their carbon footprint
-* Track environmental impact
-* Predict future emissions
-* Receive personalized recommendations
-* Visualize real-world impact
-* Participate in sustainability challenges
+## 💡 Problem Statement
+
+Millions of people want to adopt sustainable lifestyles but struggle to understand:
+
+* Their carbon footprint
+* The biggest contributors to emissions
+* Which actions create meaningful impact
+* How to stay motivated over time
+
+Most existing solutions only calculate emissions without providing actionable guidance.
+
+---
+
+## 🌱 Our Solution
+
+GreenMind AI acts as a personal sustainability companion.
+
+The platform helps users:
+
+* Track carbon emissions
+* Build a Carbon Twin
+* Forecast future emissions
+* Receive AI-powered sustainability recommendations
+* Generate sustainability reports
+* Visualize environmental impact
+* Participate in eco-friendly challenges
 
 ---
 
@@ -42,131 +55,151 @@ Using AI-powered analysis, users can:
 
 ### 🤖 AI Sustainability Coach
 
-Personalized recommendations based on user lifestyle and carbon footprint.
+Provides personalized sustainability advice based on user habits and carbon profile.
 
-### 🌱 Smart Carbon Calculator
+### 🌍 Carbon Twin
 
-Calculate emissions from:
-
-* Transportation
-* Electricity Usage
-* Food Habits
-* Shopping Habits
-* Waste Generation
-
-### 📈 Carbon Forecasting
-
-Predict future emissions based on current habits and lifestyle trends.
-
-### 🌍 Carbon Twin Simulator
-
-Create a digital representation of user behavior and simulate future sustainability scenarios.
-
-### 🏆 Gamification System
-
-Encourage sustainable habits through:
-
-* Green Points
-* Badges
-* Levels
-* Streaks
-* Challenges
+Creates a digital representation of a user's environmental footprint.
 
 ### 📊 Sustainability Dashboard
 
-Interactive dashboard displaying:
+Monitor:
 
-* Carbon Intelligence Score
-* Emission Breakdown
-* Monthly Trends
-* Progress Tracking
+* Carbon Score
+* Weekly Emissions
+* Emission Trends
 * Sustainability Goals
+* Green Points
 
-### 🌳 Impact Visualizer
+### 🔮 Carbon Future Simulator
 
-Translate carbon savings into real-world impact:
+Simulate future lifestyle changes and predict carbon reduction.
 
-* Trees Planted Equivalent
-* Energy Saved
+Examples:
+
+* Public Transport Usage
+* Plant-Based Meals
+* Home Energy Reduction
+
+### 📄 AI Sustainability Report Generator
+
+Generate ESG-style sustainability reports with:
+
+* Carbon Score
+* Emission Breakdown
+* Strengths
+* Areas for Improvement
+* Recommended Actions
+
+### 🧾 Magic Bill Scanner
+
+Upload electricity bills and receipts.
+
+The AI extracts key information and updates the Carbon Twin automatically.
+
+### 🌳 Impact Visualization
+
+Convert carbon savings into real-world equivalents:
+
+* Trees Planted
 * Distance Not Driven
-* Environmental Benefits
+* Energy Saved
 
 ---
 
-## 🎯 Innovation
-
-GreenMind AI goes beyond traditional carbon calculators by introducing:
-
-* AI-driven sustainability guidance
-* Carbon Twin Simulation
-* Future Emission Forecasting
-* Gamified User Engagement
-* Interactive Environmental Impact Visualization
-
----
-
-## 🛠️ Technology Stack
+## 🏗️ Technology Stack
 
 ### Frontend
 
 * React
 * TypeScript
+* Vite
+
+### Styling
+
 * Tailwind CSS
-* Framer Motion
+* Glassmorphism UI
 
 ### Data Visualization
 
 * Recharts
 
-### Design System
+### Deployment
 
-* Glassmorphism UI
-* Responsive Design
-* Modern Eco-Tech Theme
+* Netlify
 
 ---
 
 ## 📱 User Journey
 
-1. User enters lifestyle information
-2. Platform calculates carbon footprint
-3. AI generates personalized insights
-4. Dashboard visualizes environmental impact
-5. User explores future sustainability scenarios
-6. Progress is tracked through goals and challenges
+1. User enters lifestyle information.
+2. GreenMind AI calculates emissions.
+3. Carbon Twin is generated.
+4. AI Coach provides recommendations.
+5. Future Simulator predicts impact.
+6. Sustainability reports are generated.
+7. Bill Scanner updates environmental data automatically.
+
+---
+
+## 🎯 Innovation Highlights
+
+GreenMind AI goes beyond traditional carbon calculators by introducing:
+
+✅ Carbon Twin Technology
+
+✅ AI Sustainability Coach
+
+✅ Future Emission Forecasting
+
+✅ AI Bill Scanner
+
+✅ ESG Sustainability Reports
+
+✅ Impact Visualization
+
+---
+
+## 📸 Screenshots
+
+### Landing Page
+
+Premium sustainability-focused landing experience.
+
+### Dashboard
+
+Carbon intelligence insights and sustainability analytics.
+
+### AI Coach
+
+Personalized sustainability guidance powered by AI.
+
+### Carbon Future Simulator
+
+Predict environmental impact before taking action.
+
+### Magic Bill Scanner
+
+Automatically extract data from bills and receipts.
 
 ---
 
 ## 🌎 Sustainability Impact
 
-GreenMind AI empowers users to make informed decisions that contribute to:
+GreenMind AI empowers users to:
 
-* Reduced Carbon Emissions
-* Energy Conservation
-* Sustainable Transportation
-* Responsible Consumption
-* Environmental Awareness
-
----
-
-## 📸 Project Screenshots
-
-Add screenshots here after deployment.
-
-### Landing Page
-
-<img width="100%" alt="Landing Page" src="screenshot-1.png">
-
-### Dashboard
-
-<img width="100%" alt="Dashboard" src="screenshot-2.png">
+* Reduce emissions
+* Make informed decisions
+* Build sustainable habits
+* Understand environmental impact
+* Contribute to a greener future
 
 ---
 
-## 🚀 Installation
+## ⚙️ Installation
 
 ```bash
-git clone https://github.com/arjith2328/greenmind-ai.git
+git clone https://github.com/arjith2328/greenmind-ai
 
 cd greenmind-ai
 
@@ -177,25 +210,14 @@ npm run dev
 
 ---
 
-## 👨‍💻 Team
+## 🏆 Hackathon Submission
 
-Developed for Hackathon Submission.
+Challenge:
+Carbon Footprint Awareness Platform
 
-Project: GreenMind AI
-
-Theme: Carbon Footprint Awareness Platform
-
----
-
-## 🏅 Future Scope
-
-* AI Bill Scanner
-* Real-time Carbon Tracking
-* Community Sustainability Challenges
-* ESG Analytics
-* Smart City Sustainability Integration
-* Mobile Application
+Project:
+GreenMind AI – Personal Carbon Intelligence System
 
 ---
 
-### "Small Actions Today. Sustainable Future Tomorrow."
+### “Small Actions Today. Sustainable Future Tomorrow.”
