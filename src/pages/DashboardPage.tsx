@@ -30,6 +30,7 @@ export const DashboardPage = () => {
         </motion.div>
       </div>
 
+      <h2 className="sr-only">Dashboard Overview</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
           <Card className="bg-gradient-to-br from-greenmind-bg to-greenmind-primary/10 border-greenmind-primary/30">
@@ -40,7 +41,7 @@ export const DashboardPage = () => {
                   <p className="text-3xl font-bold text-white">42.5 <span className="text-sm font-normal text-gray-400">kg CO₂</span></p>
                 </div>
                 <div className="bg-greenmind-primary/20 p-3 rounded-xl">
-                  <TrendingDown className="w-6 h-6 text-greenmind-primary" />
+                  <TrendingDown aria-hidden="true" className="w-6 h-6 text-greenmind-primary" />
                 </div>
               </div>
               <div className="mt-4 flex items-center text-sm text-greenmind-primary font-medium">
@@ -59,7 +60,7 @@ export const DashboardPage = () => {
                   <p className="text-3xl font-bold text-white">18.2 <span className="text-sm font-normal text-gray-400">trees</span></p>
                 </div>
                 <div className="bg-greenmind-accent/20 p-3 rounded-xl">
-                  <Leaf className="w-6 h-6 text-greenmind-accent" />
+                  <Leaf aria-hidden="true" className="w-6 h-6 text-greenmind-accent" />
                 </div>
               </div>
               <div className="mt-4 flex items-center text-sm text-gray-400 font-medium">
@@ -78,7 +79,7 @@ export const DashboardPage = () => {
                   <p className="text-xl font-bold text-white">Plastic-Free Week</p>
                 </div>
                 <div className="bg-greenmind-secondary/20 p-3 rounded-xl">
-                  <Target className="w-6 h-6 text-greenmind-secondary" />
+                  <Target aria-hidden="true" className="w-6 h-6 text-greenmind-secondary" />
                 </div>
               </div>
               <div className="mt-4">

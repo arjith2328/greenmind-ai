@@ -21,7 +21,7 @@ export const ReportGenerator = () => {
         onClick={() => setIsOpen(true)}
         className="bg-greenmind-primary text-black hover:bg-greenmind-secondary shadow-[0_0_15px_rgba(0,200,83,0.4)] flex items-center gap-2 font-medium"
       >
-        <Sparkles className="w-4 h-4" />
+        <Sparkles aria-hidden="true" className="w-4 h-4" />
         Generate AI Sustainability Report
       </Button>
 
@@ -54,9 +54,10 @@ export const ReportGenerator = () => {
                 </div>
                 <button 
                   onClick={() => setIsOpen(false)}
-                  className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors border border-white/10"
+                  aria-label="Close report"
+                  className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors border border-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-greenmind-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#081C15]"
                 >
-                  <X className="w-5 h-5 text-gray-300" />
+                  <X aria-hidden="true" className="w-5 h-5 text-gray-300" />
                 </button>
               </div>
 

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Fingerprint, TrendingUp, Brain, Leaf } from 'lucide-react';
 
@@ -29,25 +30,38 @@ const cards = [
 ];
 
 // Floating particles component
+const generateParticles = () => {
+  return [...Array(15)].map(() => ({
+    x1: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
+    y1: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1000),
+    op1: Math.random() * 0.5 + 0.2,
+    y2: Math.random() * -200 - 100,
+    x2: Math.random() * 100 - 50,
+    dur: Math.random() * 10 + 10
+  }));
+};
+
 const Particles = () => {
+  const [particles] = useState<ReturnType<typeof generateParticles>>(generateParticles);
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-      {[...Array(15)].map((_, i) => (
+      {particles.map((p, i) => (
         <motion.div
           key={i}
           className="absolute w-2 h-2 rounded-full bg-greenmind-primary/20 blur-[1px]"
           initial={{
-            x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
-            y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1000),
-            opacity: Math.random() * 0.5 + 0.2
+            x: p.x1,
+            y: p.y1,
+            opacity: p.op1
           }}
           animate={{
-            y: [null, Math.random() * -200 - 100],
-            x: [null, Math.random() * 100 - 50],
+            y: [null, p.y2],
+            x: [null, p.x2],
             opacity: [null, 0]
           }}
           transition={{
-            duration: Math.random() * 10 + 10,
+            duration: p.dur,
             repeat: Infinity,
             ease: 'linear'
           }}

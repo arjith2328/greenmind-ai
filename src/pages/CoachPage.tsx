@@ -4,11 +4,7 @@ import { Brain, Send, User } from 'lucide-react';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 
-type Message = {
-  id: string;
-  sender: 'user' | 'ai';
-  text: string;
-};
+import type { Message } from '../types';
 
 const initialMessages: Message[] = [
   {
@@ -75,7 +71,7 @@ export const CoachPage = () => {
       </div>
 
       <Card className="flex-1 flex flex-col border-white/10 overflow-hidden bg-greenmind-bg/50">
-        <div className="flex-1 p-6 overflow-y-auto space-y-6 custom-scrollbar">
+        <div className="flex-1 p-6 overflow-y-auto space-y-6 custom-scrollbar" aria-live="polite">
           <AnimatePresence>
             {messages.map((msg) => (
               <motion.div
@@ -86,9 +82,9 @@ export const CoachPage = () => {
               >
                 <div className={`p-2 rounded-xl flex-shrink-0 ${msg.sender === 'ai' ? 'bg-greenmind-accent/20' : 'bg-greenmind-primary/20'}`}>
                   {msg.sender === 'ai' ? (
-                    <Brain className="w-6 h-6 text-greenmind-accent" />
+                    <Brain aria-hidden="true" className="w-6 h-6 text-greenmind-accent" />
                   ) : (
-                    <User className="w-6 h-6 text-greenmind-primary" />
+                    <User aria-hidden="true" className="w-6 h-6 text-greenmind-primary" />
                   )}
                 </div>
                 <div className={`p-4 rounded-2xl max-w-[80%] ${
@@ -104,7 +100,7 @@ export const CoachPage = () => {
           {isTyping && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-start gap-4">
               <div className="bg-greenmind-accent/20 p-2 rounded-xl flex-shrink-0">
-                <Brain className="w-6 h-6 text-greenmind-accent" />
+                <Brain aria-hidden="true" className="w-6 h-6 text-greenmind-accent" />
               </div>
               <div className="bg-greenmind-primary/10 border border-greenmind-primary/20 p-4 rounded-2xl rounded-tl-sm flex items-center gap-2">
                 <span className="w-2 h-2 bg-greenmind-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
@@ -123,10 +119,11 @@ export const CoachPage = () => {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Ask Coach Green for advice..."
-              className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-greenmind-primary/50 transition-all"
+              aria-label="Type your message"
+              className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-greenmind-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#081C15]"
             />
-            <Button type="submit" disabled={!inputValue.trim() || isTyping} className="bg-greenmind-primary hover:bg-greenmind-secondary text-black rounded-xl px-6">
-              <Send className="w-5 h-5" />
+            <Button type="submit" aria-label="Send message" disabled={!inputValue.trim() || isTyping} className="bg-greenmind-primary hover:bg-greenmind-secondary text-black rounded-xl px-6">
+              <Send aria-hidden="true" className="w-5 h-5" />
             </Button>
           </form>
         </div>

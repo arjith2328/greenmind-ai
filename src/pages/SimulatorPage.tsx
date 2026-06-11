@@ -10,7 +10,7 @@ export const SimulatorPage = () => {
   const [energyReduction, setEnergyReduction] = useState(10);
 
   const baselineEmissions = 12500; // kg CO2 per year
-  const _baselineCost = 4500; // $ per year
+
 
   // Simple calculation mock
   const transportSavings = publicTransportDays * 52 * 5; // 5kg per day switched
@@ -59,7 +59,8 @@ export const SimulatorPage = () => {
                   max="7"
                   value={publicTransportDays}
                   onChange={(e) => setPublicTransportDays(Number(e.target.value))}
-                  className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-greenmind-primary"
+                  aria-label="Public Transport Days per Week"
+                  className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-greenmind-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-greenmind-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#081C15]"
                 />
               </div>
 
@@ -74,7 +75,8 @@ export const SimulatorPage = () => {
                   max="21"
                   value={vegetarianMeals}
                   onChange={(e) => setVegetarianMeals(Number(e.target.value))}
-                  className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-greenmind-secondary"
+                  aria-label="Plant-Based Meals per Week"
+                  className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-greenmind-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-greenmind-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-[#081C15]"
                 />
               </div>
 
@@ -90,7 +92,8 @@ export const SimulatorPage = () => {
                   step="5"
                   value={energyReduction}
                   onChange={(e) => setEnergyReduction(Number(e.target.value))}
-                  className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-greenmind-accent"
+                  aria-label="Home Energy Reduction Percentage"
+                  className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-greenmind-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-greenmind-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#081C15]"
                 />
               </div>
             </CardContent>
@@ -99,14 +102,14 @@ export const SimulatorPage = () => {
           <div className="grid grid-cols-2 gap-4">
             <Card className="bg-gradient-to-br from-greenmind-primary/20 to-transparent border-greenmind-primary/30">
               <CardContent className="p-6 flex flex-col items-center text-center justify-center">
-                <Save className="w-8 h-8 text-greenmind-primary mb-2" />
+                <Save aria-hidden="true" className="w-8 h-8 text-greenmind-primary mb-2" />
                 <p className="text-sm text-gray-400 font-medium">CO₂ Saved Annually</p>
                 <p className="text-2xl font-bold text-white">{Math.round(totalSaved).toLocaleString()} kg</p>
               </CardContent>
             </Card>
             <Card className="bg-gradient-to-br from-greenmind-accent/20 to-transparent border-greenmind-accent/30">
               <CardContent className="p-6 flex flex-col items-center text-center justify-center">
-                <DollarSign className="w-8 h-8 text-greenmind-accent mb-2" />
+                <DollarSign aria-hidden="true" className="w-8 h-8 text-greenmind-accent mb-2" />
                 <p className="text-sm text-gray-400 font-medium">Estimated Cost Savings</p>
                 <p className="text-2xl font-bold text-white">${Math.round(estimatedCostSavings).toLocaleString()}</p>
               </CardContent>
@@ -149,11 +152,11 @@ export const SimulatorPage = () => {
                 <div>
                   <p className="text-sm text-gray-400">Equivalent to planting</p>
                   <p className="text-xl font-bold text-white flex items-center gap-2">
-                    <Leaf className="w-5 h-5 text-greenmind-primary" />
+                    <Leaf aria-hidden="true" className="w-5 h-5 text-greenmind-primary" />
                     {Math.round(totalSaved / 21)} trees
                   </p>
                 </div>
-                <ArrowRight className="w-6 h-6 text-gray-500" />
+                <ArrowRight aria-hidden="true" className="w-6 h-6 text-gray-500" />
                 <div className="text-right">
                   <p className="text-sm text-gray-400">Or driving</p>
                   <p className="text-xl font-bold text-white">

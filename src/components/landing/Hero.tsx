@@ -52,12 +52,12 @@ export const Hero = () => {
           transition={{ duration: 0.5, delay: 0.4, type: 'spring' }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <Link to="/dashboard">
+          <Link to="/dashboard" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-greenmind-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#081C15] rounded-lg block">
             <Button size="lg" className="w-full sm:w-auto text-lg bg-greenmind-primary text-black hover:bg-greenmind-secondary shadow-[0_0_20px_rgba(0,200,83,0.4)] transition-all">
               Start Tracking
             </Button>
           </Link>
-          <Link to="/simulator">
+          <Link to="/simulator" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-greenmind-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#081C15] rounded-lg block">
             <Button size="lg" variant="glass" className="w-full sm:w-auto text-lg group">
               Try Simulator 
               <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">→</span>

@@ -23,7 +23,7 @@ export const CTA = () => {
             Join thousands of users who are already shaping a greener future with AI-powered insights.
           </p>
           <div className="relative z-10">
-            <Link to="/dashboard">
+            <Link to="/dashboard" className="inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-greenmind-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#081C15] rounded-lg">
               <Button size="lg" className="text-lg px-10 h-14 bg-white text-black hover:bg-gray-200">
                 Start For Free
               </Button>

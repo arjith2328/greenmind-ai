@@ -19,13 +19,13 @@ export const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/10 bg-greenmind-bg/80 backdrop-blur-md">
+    <nav aria-label="Main navigation" className="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/10 bg-greenmind-bg/80 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link to="/" className="flex items-center gap-2 group">
+            <Link to="/" aria-label="Home" className="flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-greenmind-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#081C15] rounded-lg">
               <div className="bg-greenmind-primary/20 p-2 rounded-lg group-hover:bg-greenmind-primary/30 transition-colors">
-                <Leaf className="w-6 h-6 text-greenmind-primary" />
+                <Leaf aria-hidden="true" className="w-6 h-6 text-greenmind-primary" />
               </div>
               <span className="text-xl font-bold text-white tracking-tight">GreenMind<span className="text-greenmind-primary">.AI</span></span>
             </Link>
@@ -37,7 +37,7 @@ export const Navbar = () => {
                   key={link.name}
                   to={link.path}
                   className={cn(
-                    'px-3 py-2 rounded-md text-sm font-medium transition-colors relative',
+                    'px-3 py-2 rounded-md text-sm font-medium transition-colors relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-greenmind-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#081C15]',
                     isActive(link.path) ? 'text-white' : 'text-gray-300 hover:text-white hover:bg-white/5'
                   )}
                 >
@@ -58,9 +58,11 @@ export const Navbar = () => {
           <div className="-mr-2 flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-white/10 focus:outline-none"
+              aria-expanded={isOpen}
+              aria-label="Toggle navigation menu"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-greenmind-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#081C15]"
             >
-              {isOpen ? <X className="block h-6 w-6" /> : <Menu className="block h-6 w-6" />}
+              {isOpen ? <X aria-hidden="true" className="block h-6 w-6" /> : <Menu aria-hidden="true" className="block h-6 w-6" />}
             </button>
           </div>
         </div>
@@ -80,7 +82,7 @@ export const Navbar = () => {
                   key={link.name}
                   to={link.path}
                   className={cn(
-                    'block px-3 py-2 rounded-md text-base font-medium',
+                    'block px-3 py-2 rounded-md text-base font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-greenmind-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#081C15]',
                     isActive(link.path) ? 'bg-greenmind-primary/20 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white'
                   )}
                   onClick={() => setIsOpen(false)}

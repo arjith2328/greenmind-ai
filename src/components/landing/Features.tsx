@@ -3,22 +3,22 @@ import { Scan, Brain, LineChart, Globe } from 'lucide-react';
 
 const features = [
   {
-    icon: <Globe className="w-8 h-8 text-greenmind-primary" />,
+    icon: <Globe aria-hidden="true" className="w-8 h-8 text-greenmind-primary" />,
     title: 'AI Carbon Twin',
     description: 'We create a dynamic digital twin of your carbon footprint, constantly learning and adapting to your lifestyle.'
   },
   {
-    icon: <Brain className="w-8 h-8 text-greenmind-accent" />,
+    icon: <Brain aria-hidden="true" className="w-8 h-8 text-greenmind-accent" />,
     title: 'Personal Sustainability Coach',
     description: 'Get actionable, tailored advice from our AI coach to reduce emissions without compromising your lifestyle.'
   },
   {
-    icon: <LineChart className="w-8 h-8 text-greenmind-secondary" />,
+    icon: <LineChart aria-hidden="true" className="w-8 h-8 text-greenmind-secondary" />,
     title: 'Future Simulator',
     description: 'Test potential lifestyle changes and visualize your carbon savings before committing to them.'
   },
   {
-    icon: <Scan className="w-8 h-8 text-white" />,
+    icon: <Scan aria-hidden="true" className="w-8 h-8 text-white" />,
     title: 'Magic Bill Scanner',
     description: 'Upload receipts and bills. Our AI instantly extracts data to update your carbon profile automatically.'
   }
