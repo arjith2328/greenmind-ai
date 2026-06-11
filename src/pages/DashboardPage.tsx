@@ -1,12 +1,13 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Leaf, Award, Target, TrendingDown } from 'lucide-react';
 import { CarbonTwin } from '../components/dashboard/CarbonTwin';
 import { CarbonChart } from '../components/dashboard/CarbonChart';
-import { Card, CardContent } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
+import { StatCard } from '../components/ui/StatCard';
 import { ReportGenerator } from '../components/dashboard/ReportGenerator';
 
-export const DashboardPage = () => {
+export const DashboardPage: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -33,57 +34,41 @@ export const DashboardPage = () => {
       <h2 className="sr-only">Dashboard Overview</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-          <Card className="bg-gradient-to-br from-greenmind-bg to-greenmind-primary/10 border-greenmind-primary/30">
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start">
-                <div className="space-y-2">
-                  <p className="text-sm text-gray-400 font-medium uppercase tracking-wider">Weekly Emissions</p>
-                  <p className="text-3xl font-bold text-white">42.5 <span className="text-sm font-normal text-gray-400">kg CO₂</span></p>
-                </div>
-                <div className="bg-greenmind-primary/20 p-3 rounded-xl">
-                  <TrendingDown aria-hidden="true" className="w-6 h-6 text-greenmind-primary" />
-                </div>
-              </div>
-              <div className="mt-4 flex items-center text-sm text-greenmind-primary font-medium">
+          <StatCard
+            title="Weekly Emissions"
+            value="42.5"
+            valueSuffix="kg CO₂"
+            icon={<TrendingDown aria-hidden="true" className="w-6 h-6 text-greenmind-primary" />}
+            iconContainerClassName="bg-greenmind-primary/20"
+            className="bg-gradient-to-br from-greenmind-bg to-greenmind-primary/10 border-greenmind-primary/30"
+            footer={
+              <div className="flex items-center text-greenmind-primary">
                 <span className="text-green-400 bg-green-400/10 px-2 py-0.5 rounded mr-2">-12%</span> vs last week
               </div>
-            </CardContent>
-          </Card>
+            }
+          />
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-          <Card className="border-white/10">
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start">
-                <div className="space-y-2">
-                  <p className="text-sm text-gray-400 font-medium uppercase tracking-wider">Trees Equivalent</p>
-                  <p className="text-3xl font-bold text-white">18.2 <span className="text-sm font-normal text-gray-400">trees</span></p>
-                </div>
-                <div className="bg-greenmind-accent/20 p-3 rounded-xl">
-                  <Leaf aria-hidden="true" className="w-6 h-6 text-greenmind-accent" />
-                </div>
-              </div>
-              <div className="mt-4 flex items-center text-sm text-gray-400 font-medium">
-                Needed to offset your emissions
-              </div>
-            </CardContent>
-          </Card>
+          <StatCard
+            title="Trees Equivalent"
+            value="18.2"
+            valueSuffix="trees"
+            icon={<Leaf aria-hidden="true" className="w-6 h-6 text-greenmind-accent" />}
+            iconContainerClassName="bg-greenmind-accent/20"
+            footer="Needed to offset your emissions"
+          />
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
-          <Card className="border-white/10">
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start">
-                <div className="space-y-2">
-                  <p className="text-sm text-gray-400 font-medium uppercase tracking-wider">Active Goal</p>
-                  <p className="text-xl font-bold text-white">Plastic-Free Week</p>
-                </div>
-                <div className="bg-greenmind-secondary/20 p-3 rounded-xl">
-                  <Target aria-hidden="true" className="w-6 h-6 text-greenmind-secondary" />
-                </div>
-              </div>
-              <div className="mt-4">
-                <div className="flex justify-between text-sm mb-1 text-gray-400">
+          <StatCard
+            title="Active Goal"
+            value="Plastic-Free Week"
+            icon={<Target aria-hidden="true" className="w-6 h-6 text-greenmind-secondary" />}
+            iconContainerClassName="bg-greenmind-secondary/20"
+            footer={
+              <div className="w-full">
+                <div className="flex justify-between text-sm mb-1 text-gray-400 font-normal">
                   <span>Progress</span>
                   <span>4/7 Days</span>
                 </div>
@@ -91,8 +76,8 @@ export const DashboardPage = () => {
                   <div className="bg-greenmind-secondary h-1.5 rounded-full" style={{ width: '57%' }} />
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            }
+          />
         </motion.div>
       </div>
 

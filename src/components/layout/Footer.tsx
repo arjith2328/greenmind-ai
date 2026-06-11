@@ -15,7 +15,7 @@ const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-export const Footer = () => {
+export const Footer: React.FC = () => {
   return (
     <footer className="relative bg-[#081C15] overflow-hidden pt-24 pb-12 border-t border-white/5">
       {/* Background glow */}

@@ -46,7 +46,7 @@ const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
   );
 };
 
-export const Stats = () => {
+export const Stats: React.FC = () => {
   return (
     <section className="py-24 bg-[#081C15] border-y border-white/5 relative overflow-hidden">
       {/* Background ambient light */}

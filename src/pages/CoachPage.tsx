@@ -1,67 +1,19 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Brain, Send, User } from 'lucide-react';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
+import { useCoach } from '../hooks/useCoach';
 
-import type { Message } from '../types';
-
-const initialMessages: Message[] = [
-  {
-    id: '1',
-    sender: 'ai',
-    text: "Hi Alex! I'm Coach Green, your personal sustainability AI. Based on your Carbon Twin, I see you've had a spike in transport emissions this week. How can I help you today?"
-  }
-];
-
-export const CoachPage = () => {
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
-  const [inputValue, setInputValue] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages, isTyping]);
-
-  const handleSend = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!inputValue.trim()) return;
-
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      sender: 'user',
-      text: inputValue
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    setInputValue('');
-    setIsTyping(true);
-
-    // Simulate AI response based on keywords or just a generic response
-    setTimeout(() => {
-      let responseText = "That's a great question! Based on your current habits, making that change could reduce your weekly footprint by about 5%. I can add this to your active goals if you'd like.";
-      
-      if (userMessage.text.toLowerCase().includes('flight') || userMessage.text.toLowerCase().includes('travel')) {
-        responseText = "Flights are a major source of emissions. If you have to fly, consider economy class and packing light. Alternatively, offset your flight by investing in verified carbon reduction projects directly through our app.";
-      } else if (userMessage.text.toLowerCase().includes('food') || userMessage.text.toLowerCase().includes('meat')) {
-        responseText = "Food accounts for 15% of your footprint. Switching to plant-based meals just two days a week can cut your food-related emissions by 25%. Shall we start a 'Meatless Monday' challenge?";
-      }
-
-      const aiMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        sender: 'ai',
-        text: responseText
-      };
-
-      setIsTyping(false);
-      setMessages(prev => [...prev, aiMessage]);
-    }, 1500);
-  };
+export const CoachPage: React.FC = React.memo(() => {
+  const {
+    messages,
+    inputValue,
+    isTyping,
+    messagesEndRef,
+    setInputValue,
+    handleSend
+  } = useCoach();
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 h-[calc(100vh-80px)] flex flex-col">
@@ -117,6 +69,7 @@ export const CoachPage = () => {
             <input
               type="text"
               value={inputValue}
+              maxLength={500}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Ask Coach Green for advice..."
               aria-label="Type your message"
@@ -130,4 +83,6 @@ export const CoachPage = () => {
       </Card>
     </div>
   );
-};
+});
+
+CoachPage.displayName = 'CoachPage';

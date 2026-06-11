@@ -5,7 +5,7 @@ import { Button } from '../ui/Button';
 import { cn } from '../../lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export const Navbar = () => {
+export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const location = useLocation();
 

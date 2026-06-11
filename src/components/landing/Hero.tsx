@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Button } from '../ui/Button';
 import { Link } from 'react-router-dom';
 
-export const Hero = () => {
+export const Hero: React.FC = () => {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* 3D Earth Simulation Background */}

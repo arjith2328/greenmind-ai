@@ -1,11 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { MainLayout } from './components/layout/MainLayout';
-import { LandingPage } from './pages/LandingPage';
-import { DashboardPage } from './pages/DashboardPage';
-import { CoachPage } from './pages/CoachPage';
-import { SimulatorPage } from './pages/SimulatorPage';
-import { ScannerPage } from './pages/ScannerPage';
+import { PageLoader } from './components/ui/PageLoader';
+
+const LandingPage = lazy(() => import('./pages/LandingPage').then(module => ({ default: module.LandingPage })));
+const DashboardPage = lazy(() => import('./pages/DashboardPage').then(module => ({ default: module.DashboardPage })));
+const CoachPage = lazy(() => import('./pages/CoachPage').then(module => ({ default: module.CoachPage })));
+const SimulatorPage = lazy(() => import('./pages/SimulatorPage').then(module => ({ default: module.SimulatorPage })));
+const ScannerPage = lazy(() => import('./pages/ScannerPage').then(module => ({ default: module.ScannerPage })));
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -22,15 +24,17 @@ function App() {
   return (
     <>
       <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<LandingPage />} />
-          <Route path="dashboard" element={<DashboardPage />} />
-          <Route path="coach" element={<CoachPage />} />
-          <Route path="simulator" element={<SimulatorPage />} />
-          <Route path="scanner" element={<ScannerPage />} />
-        </Route>
-      </Routes>
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<LandingPage />} />
+            <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="coach" element={<CoachPage />} />
+            <Route path="simulator" element={<SimulatorPage />} />
+            <Route path="scanner" element={<ScannerPage />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </>
   );
 }

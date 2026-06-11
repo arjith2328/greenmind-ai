@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Button } from '../ui/Button';
 import { Link } from 'react-router-dom';
 
-export const CTA = () => {
+export const CTA: React.FC = () => {
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-greenmind-primary/5 border-t border-white/10" />

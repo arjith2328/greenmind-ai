@@ -8,7 +8,7 @@ import { Testimonials } from '../components/landing/Testimonials';
 import { CTA } from '../components/landing/CTA';
 import { CarbonAwareness } from '../components/landing/CarbonAwareness';
 
-export const LandingPage = () => {
+export const LandingPage: React.FC = () => {
   return (
     <main className="flex flex-col bg-[#081C15]">
       <Hero />

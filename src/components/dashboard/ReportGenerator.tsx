@@ -1,19 +1,50 @@
-import { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, X, CheckCircle, AlertTriangle, ArrowRight, Download } from 'lucide-react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import { Button } from '../ui/Button';
+import type { SustainabilityReportData } from '../../types';
 
-const data = [
-  { name: 'Transport', value: 45 },
-  { name: 'Energy', value: 30 },
-  { name: 'Food', value: 15 },
-  { name: 'Waste', value: 10 },
-];
 const COLORS = ['#00C853', '#00E676', '#64FFDA', '#4b5563'];
 
-export const ReportGenerator = () => {
+export const ReportGenerator: React.FC = React.memo(() => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const reportData: SustainabilityReportData = useMemo(() => ({
+    dateGenerated: new Date().toLocaleDateString(),
+    confidence: 94,
+    carbonScore: { score: 85, grade: 'A-', percentile: 15 },
+    breakdown: [
+      { name: 'Transport', value: 45, color: '#00C853' },
+      { name: 'Energy', value: 30, color: '#00E676' },
+      { name: 'Food', value: 15, color: '#64FFDA' },
+      { name: 'Waste', value: 10, color: '#4b5563' },
+    ],
+    strengths: [
+      'Excellent reduction in home energy usage (30% below national average).',
+      'Consistent plant-based diet choices have saved ~120kg CO₂ this month.'
+    ],
+    weaknesses: [
+      'Commuting emissions remain high due to daily solo car travel.',
+      'Single-use plastics observed in recent grocery receipt scans.'
+    ],
+    recommendations: [
+      {
+        title: 'Adopt Public Transit',
+        description: 'Switching to train/bus 2 days a week cuts transport emissions by 40%.',
+        impactPercentage: 40
+      },
+      {
+        title: 'Smart Thermostat',
+        description: 'Automating home temp can save an extra 15% on heating/cooling.',
+        impactPercentage: 15
+      }
+    ],
+    predictedSavings: {
+      carbonKg: 450,
+      financialUsd: 320
+    }
+  }), []);
 
   return (
     <>
@@ -50,7 +81,7 @@ export const ReportGenerator = () => {
                     <span className="text-greenmind-primary font-semibold text-sm tracking-widest uppercase">AI Generated</span>
                   </div>
                   <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">ESG Sustainability Report</h2>
-                  <p className="text-gray-400 mt-1 text-sm">Generated on {new Date().toLocaleDateString()} • Confidence: 94%</p>
+                  <p className="text-gray-400 mt-1 text-sm">Generated on {reportData.dateGenerated} • Confidence: {reportData.confidence}%</p>
                 </div>
                 <button 
                   onClick={() => setIsOpen(false)}
@@ -71,11 +102,11 @@ export const ReportGenerator = () => {
                     <div className="absolute -top-10 -right-10 w-32 h-32 bg-greenmind-primary/20 rounded-full blur-[40px]" />
                     <p className="text-gray-400 font-medium mb-2">Overall Carbon Score</p>
                     <div className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-greenmind-primary to-greenmind-secondary">
-                      85<span className="text-3xl text-gray-500">/100</span>
+                      {reportData.carbonScore.score}<span className="text-3xl text-gray-500">/100</span>
                     </div>
-                    <p className="mt-2 text-xl font-bold text-white">Grade: A-</p>
+                    <p className="mt-2 text-xl font-bold text-white">Grade: {reportData.carbonScore.grade}</p>
                     <p className="mt-2 text-sm text-greenmind-primary bg-greenmind-primary/10 px-3 py-1 rounded-full border border-greenmind-primary/20">
-                      Top 15% of GreenMind Users
+                      Top {reportData.carbonScore.percentile}% of GreenMind Users
                     </p>
                   </div>
 
@@ -86,15 +117,15 @@ export const ReportGenerator = () => {
                       <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
                           <Pie
-                            data={data}
+                            data={reportData.breakdown}
                             innerRadius={50}
                             outerRadius={80}
                             paddingAngle={5}
                             dataKey="value"
                             stroke="none"
                           >
-                            {data.map((_entry, index) => (
-                              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                            {reportData.breakdown.map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={entry.color || COLORS[index % COLORS.length]} />
                             ))}
                           </Pie>
                           <Tooltip 
@@ -105,9 +136,12 @@ export const ReportGenerator = () => {
                       </ResponsiveContainer>
                     </div>
                     <div className="flex justify-center gap-4 text-xs mt-2 text-gray-400 font-medium">
-                      <span className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-[#00C853]" /> Transport</span>
-                      <span className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-[#00E676]" /> Energy</span>
-                      <span className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-[#64FFDA]" /> Food</span>
+                      {reportData.breakdown.map((entry, index) => (
+                        <span key={index} className="flex items-center gap-1">
+                          <div className="w-2 h-2 rounded-full" style={{ backgroundColor: entry.color || COLORS[index % COLORS.length] }} /> 
+                          {entry.name}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -120,14 +154,12 @@ export const ReportGenerator = () => {
                       Sustainability Strengths
                     </h3>
                     <ul className="space-y-4">
-                      <li className="text-sm text-gray-300 flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-greenmind-primary mt-1.5 shrink-0" />
-                        Excellent reduction in home energy usage (30% below national average).
-                      </li>
-                      <li className="text-sm text-gray-300 flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-greenmind-primary mt-1.5 shrink-0" />
-                        Consistent plant-based diet choices have saved ~120kg CO₂ this month.
-                      </li>
+                      {reportData.strengths.map((str, i) => (
+                        <li key={i} className="text-sm text-gray-300 flex items-start gap-3">
+                          <div className="w-1.5 h-1.5 rounded-full bg-greenmind-primary mt-1.5 shrink-0" />
+                          {str}
+                        </li>
+                      ))}
                     </ul>
                   </div>
 
@@ -137,14 +169,12 @@ export const ReportGenerator = () => {
                       Areas for Improvement
                     </h3>
                     <ul className="space-y-4">
-                      <li className="text-sm text-gray-300 flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 shrink-0" />
-                        Commuting emissions remain high due to daily solo car travel.
-                      </li>
-                      <li className="text-sm text-gray-300 flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 shrink-0" />
-                        Single-use plastics observed in recent grocery receipt scans.
-                      </li>
+                      {reportData.weaknesses.map((weak, i) => (
+                        <li key={i} className="text-sm text-gray-300 flex items-start gap-3">
+                          <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1.5 shrink-0" />
+                          {weak}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -155,25 +185,17 @@ export const ReportGenerator = () => {
                   <h3 className="text-lg font-bold text-white mb-4 relative z-10">AI Recommended Actions</h3>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
-                    <div className="bg-black/20 border border-white/5 p-4 rounded-xl flex items-start gap-3 group hover:border-greenmind-primary/30 transition-colors cursor-default backdrop-blur-sm">
-                      <div className="bg-greenmind-primary/20 p-2 rounded-lg shrink-0">
-                        <ArrowRight className="w-4 h-4 text-greenmind-primary group-hover:translate-x-1 transition-transform" />
+                    {reportData.recommendations.map((rec, i) => (
+                      <div key={i} className={`bg-black/20 border border-white/5 p-4 rounded-xl flex items-start gap-3 group transition-colors cursor-default backdrop-blur-sm hover:border-${i % 2 === 0 ? 'greenmind-primary' : 'greenmind-accent'}/30`}>
+                        <div className={`bg-${i % 2 === 0 ? 'greenmind-primary' : 'greenmind-accent'}/20 p-2 rounded-lg shrink-0`}>
+                          <ArrowRight className={`w-4 h-4 text-${i % 2 === 0 ? 'greenmind-primary' : 'greenmind-accent'} group-hover:translate-x-1 transition-transform`} />
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-white">{rec.title}</p>
+                          <p className="text-xs text-gray-400 mt-1 leading-relaxed">{rec.description}</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-sm font-semibold text-white">Adopt Public Transit</p>
-                        <p className="text-xs text-gray-400 mt-1 leading-relaxed">Switching to train/bus 2 days a week cuts transport emissions by 40%.</p>
-                      </div>
-                    </div>
-
-                    <div className="bg-black/20 border border-white/5 p-4 rounded-xl flex items-start gap-3 group hover:border-greenmind-accent/30 transition-colors cursor-default backdrop-blur-sm">
-                      <div className="bg-greenmind-accent/20 p-2 rounded-lg shrink-0">
-                        <ArrowRight className="w-4 h-4 text-greenmind-accent group-hover:translate-x-1 transition-transform" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold text-white">Smart Thermostat</p>
-                        <p className="text-xs text-gray-400 mt-1 leading-relaxed">Automating home temp can save an extra 15% on heating/cooling.</p>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
 
@@ -186,11 +208,11 @@ export const ReportGenerator = () => {
                   <div className="flex gap-8">
                     <div className="text-center">
                       <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-1">Carbon</p>
-                      <p className="text-2xl font-black text-greenmind-primary">-450 <span className="text-base font-medium">kg</span></p>
+                      <p className="text-2xl font-black text-greenmind-primary">-{reportData.predictedSavings.carbonKg} <span className="text-base font-medium">kg</span></p>
                     </div>
                     <div className="text-center">
                       <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-1">Financial</p>
-                      <p className="text-2xl font-black text-white">+$320</p>
+                      <p className="text-2xl font-black text-white">+${reportData.predictedSavings.financialUsd}</p>
                     </div>
                   </div>
                 </div>
@@ -212,4 +234,6 @@ export const ReportGenerator = () => {
       </AnimatePresence>
     </>
   );
-};
+});
+
+ReportGenerator.displayName = 'ReportGenerator';

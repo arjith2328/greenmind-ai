@@ -1,52 +1,23 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { UploadCloud, FileText, CheckCircle, Loader2 } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
+import { useScanner } from '../hooks/useScanner';
 
-export const ScannerPage = () => {
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [file, setFile] = useState<File | null>(null);
-  const [status, setStatus] = useState<'idle' | 'scanning' | 'success'>('idle');
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      handleFile(e.dataTransfer.files[0]);
-    }
-  };
-
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      handleFile(e.target.files[0]);
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      fileInputRef.current?.click();
-    }
-  };
-
-  const handleFile = (selectedFile: File) => {
-    setFile(selectedFile);
-    setStatus('scanning');
-
-    // Simulate AI extraction process
-    setTimeout(() => {
-      setStatus('success');
-    }, 3000);
-  };
-
-  const reset = () => {
-    setFile(null);
-    setStatus('idle');
-  };
+export const ScannerPage = React.memo(() => {
+  const {
+    fileInputRef,
+    file,
+    status,
+    error,
+    handleDragOver,
+    handleDrop,
+    handleFileInput,
+    handleKeyDown,
+    reset,
+    triggerFileInput,
+  } = useScanner();
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -66,30 +37,41 @@ export const ScannerPage = () => {
             >
               <CardContent className="p-12">
                 <div 
-                  className="border-2 border-dashed border-white/20 rounded-2xl p-12 flex flex-col items-center justify-center text-center hover:bg-white/5 transition-colors cursor-pointer relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-greenmind-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#081C15]"
+                  className={`border-2 border-dashed ${error ? 'border-red-500/50 hover:bg-red-500/5' : 'border-white/20 hover:bg-white/5'} rounded-2xl p-12 flex flex-col items-center justify-center text-center transition-colors cursor-pointer relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-greenmind-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#081C15]`}
                   onDragOver={handleDragOver}
                   onDrop={handleDrop}
                   role="button"
                   tabIndex={0}
                   aria-label="Upload bill or receipt"
                   onKeyDown={handleKeyDown}
-                  onClick={() => fileInputRef.current?.click()}
+                  onClick={triggerFileInput}
                 >
                   <input 
                     type="file" 
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer pointer-events-none"
                     onChange={handleFileInput}
-                    accept="image/*,.pdf"
+                    accept="image/jpeg,image/png,application/pdf"
                     ref={fileInputRef}
                     aria-label="File upload input"
                     tabIndex={-1}
                   />
-                  <div className="bg-greenmind-primary/20 p-4 rounded-full mb-4">
-                    <UploadCloud aria-hidden="true" className="w-10 h-10 text-greenmind-primary" />
+                  <div className={`${error ? 'bg-red-500/20 text-red-500' : 'bg-greenmind-primary/20 text-greenmind-primary'} p-4 rounded-full mb-4`}>
+                    <UploadCloud aria-hidden="true" className="w-10 h-10" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">Drag & Drop your bill here</h3>
-                  <p className="text-gray-400 mb-6">Supports PDF, JPG, PNG up to 10MB</p>
-                  <Button variant="outline" className="pointer-events-none">
+                  <p className="text-gray-400 mb-4">Supports PDF, JPG, PNG up to 10MB</p>
+                  
+                  {error && (
+                    <motion.p 
+                      initial={{ opacity: 0, y: -10 }} 
+                      animate={{ opacity: 1, y: 0 }} 
+                      className="text-red-400 text-sm font-medium bg-red-500/10 px-4 py-2 rounded-lg mb-6 border border-red-500/20"
+                    >
+                      {error}
+                    </motion.p>
+                  )}
+
+                  <Button variant="outline" className={`pointer-events-none ${error ? 'border-red-500/30 text-red-400' : ''}`}>
                     Browse Files
                   </Button>
                 </div>
@@ -192,4 +174,6 @@ export const ScannerPage = () => {
       </Card>
     </div>
   );
-};
+});
+
+ScannerPage.displayName = 'ScannerPage';

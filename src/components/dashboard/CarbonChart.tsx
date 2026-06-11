@@ -1,7 +1,9 @@
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import type { DashboardData } from '../../types';
 
-const data = [
+const data: DashboardData['emissionsTrend'] = [
   { name: 'Mon', emissions: 12.5 },
   { name: 'Tue', emissions: 11.2 },
   { name: 'Wed', emissions: 14.1 },
@@ -11,7 +13,7 @@ const data = [
   { name: 'Sun', emissions: 7.2 },
 ];
 
-export const CarbonChart = () => {
+export const CarbonChart: React.FC = React.memo(() => {
   return (
     <Card className="border-white/10">
       <CardHeader>
@@ -64,4 +66,6 @@ export const CarbonChart = () => {
       </CardContent>
     </Card>
   );
-};
+});
+
+CarbonChart.displayName = 'CarbonChart';

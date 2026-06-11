@@ -11,7 +11,7 @@ const chatSequence = [
   { sender: 'ai', text: 'Equivalent to planting 8 trees every year.' }
 ];
 
-export const CoachDemo = () => {
+export const CoachDemo: React.FC = () => {
   const [messages, setMessages] = useState<{sender: string, text: string}[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 

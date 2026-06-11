@@ -71,7 +71,7 @@ const Particles = () => {
   );
 };
 
-export const WhyItMatters = () => {
+export const WhyItMatters: React.FC = () => {
   return (
     <section className="py-32 relative bg-greenmind-bg overflow-hidden">
       <Particles />

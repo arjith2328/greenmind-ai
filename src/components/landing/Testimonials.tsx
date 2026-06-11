@@ -18,7 +18,7 @@ const testimonials = [
   }
 ];
 
-export const Testimonials = () => {
+export const Testimonials: React.FC = () => {
   return (
     <section className="py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

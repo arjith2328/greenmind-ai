@@ -1,37 +1,24 @@
-import { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Leaf, ArrowRight, Save, DollarSign } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/Card';
+import { StatCard } from '../components/ui/StatCard';
+import { SliderInput } from '../components/ui/SliderInput';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { useSimulator } from '../hooks/useSimulator';
 
-export const SimulatorPage = () => {
-  const [publicTransportDays, setPublicTransportDays] = useState(2);
-  const [vegetarianMeals, setVegetarianMeals] = useState(3);
-  const [energyReduction, setEnergyReduction] = useState(10);
-
-  const baselineEmissions = 12500; // kg CO2 per year
-
-
-  // Simple calculation mock
-  const transportSavings = publicTransportDays * 52 * 5; // 5kg per day switched
-  const foodSavings = vegetarianMeals * 52 * 3; // 3kg per meal switched
-  const energySavings = (baselineEmissions * 0.3 * energyReduction) / 100; // Assuming energy is 30% of baseline
-
-  const totalSaved = transportSavings + foodSavings + energySavings;
-  const projectedEmissions = baselineEmissions - totalSaved;
-  
-  const estimatedCostSavings = (transportSavings * 0.5) + (foodSavings * 1.2) + (energySavings * 0.15);
-
-  const chartData = [
-    {
-      name: 'Current',
-      emissions: baselineEmissions,
-    },
-    {
-      name: 'Projected',
-      emissions: projectedEmissions,
-    }
-  ];
+export const SimulatorPage = React.memo(() => {
+  const {
+    publicTransportDays,
+    setPublicTransportDays,
+    vegetarianMeals,
+    setVegetarianMeals,
+    energyReduction,
+    setEnergyReduction,
+    totalSaved,
+    estimatedCostSavings,
+    chartData
+  } = useSimulator();
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -48,72 +35,55 @@ export const SimulatorPage = () => {
               <CardDescription>Move the sliders to simulate changes.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-8">
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <label className="font-medium text-gray-300">Public Transport Days / Week</label>
-                  <span className="text-greenmind-primary font-bold">{publicTransportDays} days</span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="7"
-                  value={publicTransportDays}
-                  onChange={(e) => setPublicTransportDays(Number(e.target.value))}
-                  aria-label="Public Transport Days per Week"
-                  className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-greenmind-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-greenmind-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#081C15]"
-                />
-              </div>
+              <SliderInput
+                label="Public Transport Days / Week"
+                value={publicTransportDays}
+                min={0}
+                max={7}
+                valueSuffix=" days"
+                onChange={setPublicTransportDays}
+                colorVariant="primary"
+              />
 
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <label className="font-medium text-gray-300">Plant-Based Meals / Week</label>
-                  <span className="text-greenmind-secondary font-bold">{vegetarianMeals} meals</span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="21"
-                  value={vegetarianMeals}
-                  onChange={(e) => setVegetarianMeals(Number(e.target.value))}
-                  aria-label="Plant-Based Meals per Week"
-                  className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-greenmind-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-greenmind-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-[#081C15]"
-                />
-              </div>
+              <SliderInput
+                label="Plant-Based Meals / Week"
+                value={vegetarianMeals}
+                min={0}
+                max={21}
+                valueSuffix=" meals"
+                onChange={setVegetarianMeals}
+                colorVariant="secondary"
+              />
 
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <label className="font-medium text-gray-300">Home Energy Reduction (%)</label>
-                  <span className="text-greenmind-accent font-bold">{energyReduction}%</span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="50"
-                  step="5"
-                  value={energyReduction}
-                  onChange={(e) => setEnergyReduction(Number(e.target.value))}
-                  aria-label="Home Energy Reduction Percentage"
-                  className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-greenmind-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-greenmind-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#081C15]"
-                />
-              </div>
+              <SliderInput
+                label="Home Energy Reduction (%)"
+                value={energyReduction}
+                min={0}
+                max={50}
+                step={5}
+                valueSuffix="%"
+                onChange={setEnergyReduction}
+                colorVariant="accent"
+              />
             </CardContent>
           </Card>
 
           <div className="grid grid-cols-2 gap-4">
-            <Card className="bg-gradient-to-br from-greenmind-primary/20 to-transparent border-greenmind-primary/30">
-              <CardContent className="p-6 flex flex-col items-center text-center justify-center">
-                <Save aria-hidden="true" className="w-8 h-8 text-greenmind-primary mb-2" />
-                <p className="text-sm text-gray-400 font-medium">CO₂ Saved Annually</p>
-                <p className="text-2xl font-bold text-white">{Math.round(totalSaved).toLocaleString()} kg</p>
-              </CardContent>
-            </Card>
-            <Card className="bg-gradient-to-br from-greenmind-accent/20 to-transparent border-greenmind-accent/30">
-              <CardContent className="p-6 flex flex-col items-center text-center justify-center">
-                <DollarSign aria-hidden="true" className="w-8 h-8 text-greenmind-accent mb-2" />
-                <p className="text-sm text-gray-400 font-medium">Estimated Cost Savings</p>
-                <p className="text-2xl font-bold text-white">${Math.round(estimatedCostSavings).toLocaleString()}</p>
-              </CardContent>
-            </Card>
+            <StatCard
+              variant="vertical"
+              title="CO₂ Saved Annually"
+              value={Math.round(totalSaved).toLocaleString()}
+              valueSuffix="kg"
+              icon={<Save aria-hidden="true" className="w-8 h-8 text-greenmind-primary" />}
+              className="bg-gradient-to-br from-greenmind-primary/20 to-transparent border-greenmind-primary/30"
+            />
+            <StatCard
+              variant="vertical"
+              title="Estimated Cost Savings"
+              value={`$${Math.round(estimatedCostSavings).toLocaleString()}`}
+              icon={<DollarSign aria-hidden="true" className="w-8 h-8 text-greenmind-accent" />}
+              className="bg-gradient-to-br from-greenmind-accent/20 to-transparent border-greenmind-accent/30"
+            />
           </div>
         </div>
 
@@ -170,4 +140,6 @@ export const SimulatorPage = () => {
       </div>
     </div>
   );
-};
+});
+
+SimulatorPage.displayName = 'SimulatorPage';

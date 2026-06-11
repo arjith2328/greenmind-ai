@@ -28,7 +28,7 @@ const equivalents = [
   }
 ];
 
-export const ImpactVisualization = () => {
+export const ImpactVisualization: React.FC = () => {
   return (
     <section className="py-32 relative bg-greenmind-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
