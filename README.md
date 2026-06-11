@@ -281,21 +281,33 @@ Testing Areas:
 
 ### Landing Page
 
+![Landing Page](screenshots/landing-page.png)
+
 Premium eco-tech landing page experience.
 
 ### Sustainability Dashboard
+
+![Dashboard](screenshots/dashboard.png)
 
 Carbon intelligence analytics and insights.
 
 ### AI Sustainability Coach
 
+![AI Coach](screenshots/ai-coach.png)
+
 Personalized sustainability guidance.
 
 ### Carbon Future Simulator
 
+![Simulator](screenshots/simulator.png)
+
 Future emission forecasting and impact prediction.
 
 ### Magic Bill Scanner
+
+![Scanner Upload](screenshots/scanner-upload.png)
+
+![Scanner Result](screenshots/scanner-result.png)
 
 AI-powered bill analysis and carbon tracking.
 
